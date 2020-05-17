@@ -1,21 +1,13 @@
 package pir
 
+// IPIRClient : Interface for a generalized PIR Client
 type IPIRClient interface {
-	SetParams()
+	EncodeRequest(requestedBlockIndices []uint, numberOfQueries uint) (uint, error)
 
-	EncodeRequest()
-
-	GetResult()
-
-	SendRequest()
-
-	ReceiveReplies()
-
-	ProcessReplies()
+	SendRequest(requestID uint) error
 }
 
 type IPIRServer interface {
-	SetParams()
-
-	HandleRequest()
+	// TODO: Eventually change this signature to better handle pools of clients
+	HandleRequest(clients []IPIRClient) error
 }
